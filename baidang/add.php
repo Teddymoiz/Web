@@ -4,7 +4,6 @@ $username = "root";
 $password = "";
 $dbname = "db_tintuc";
 
-
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
@@ -23,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add'])) {
         $image = $target_file;
     }
 
-    $sql = "INSERT INTO db_baidang (title, content, image) VALUES ('$title', '$content', '$image')";
+    $sql = "INSERT INTO db_baidang (title, content, image, status) VALUES ('$title', '$content', '$image', 'pending')";
     if ($conn->query($sql) === TRUE) {
         header("Location: baidang.php");
     } else {

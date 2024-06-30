@@ -1,1 +1,1 @@
-<footer>Cơ sở</footer>
+<!-- <footer>Cơ sở</footer> -->

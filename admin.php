@@ -166,7 +166,7 @@
                 <h1><i class='bx bx-import'></i> Quản lý bài đăng <i class='bx bx-export'></i></h1>
             </button>
         </a>
-        <a href="cuahang.php">
+        <a href="./baidang/kiemduyet.php">
             <button class="custom-button">
                 <h1><i id="ok" class='bx bx-basket'></i> Duyệt bài đăng </i></h1>
             </button>
