@@ -145,46 +145,32 @@ body{
   margin-top: 100px; /* Đảm bảo phần content không bị che */
 }
 
-li{
-  display: inline-flex;
-}
-/* Đảm bảo rằng CSS này phù hợp với phong cách thiết kế của bạn */
-.grid.hot {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+.article {
+  display: flex;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 15px 0;
 }
 
-.article.spotlight {
-  margin: 20px 0;
+.article img {
+  max-width: 200px;
+  margin-right: 15px;
 }
 
-.article-item {
-  border: 1px solid #ddd;
-  padding: 10px;
-  background-color: #f9f9f9;
+.article .content {
+  max-width: 600px;
 }
 
-.article-thumb img {
-  width: 100%;
-  height: auto;
-}
-
-.article-info {
-  padding: 10px 0;
-}
-
-.article-info h2 {
+.article h2 {
   font-size: 1.5em;
-  margin: 10px 0;
+  margin: 0;
 }
 
-.article-info p {
-  font-size: 1em;
-  margin: 10px 0;
-}
-
-.article-info a {
-  color: #007bff;
-  text-decoration: none;
+.article p {
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Giới hạn số dòng hiển thị */
+  -webkit-box-orient: vertical;
 }

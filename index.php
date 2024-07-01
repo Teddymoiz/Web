@@ -50,7 +50,7 @@ include("config.php");
                     echo '<div class="article-info">';
                     echo '<h2><a href="chitiet.php?id=' . $row["id"] . '">' . $row["title"] . '</a></h2>';
                     echo '<p>' . $excerpt . '</p>';
-                    echo '<a href="chitiet.php?id=' . $row["id"] . '">Đọc tiếp</a>';
+                    echo '<a href="chitiet.php?id=' . $row["id"] . '"></a>';
                     echo '</div>';
                     echo '</article>';
                 }
