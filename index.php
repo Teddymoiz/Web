@@ -16,14 +16,17 @@ include("config.php");
 </head>
 <body>
 <div id="main">
-    <div id="header">
+<div id="header">
         <h1 class="h1"><a href="index.php">Tin Tức Nhanh</a></h1>
         <div id="nav">
-            <li><a href="#">Tin mới</a></li>
-            <li><a href="#">Bài viết đã thích</a></li>
-            <li><a href="dang-bai.php">Độc giả đăng bài</a></li>
+            <ul>
+                <li><a href="index.php">Tin mới</a></li>
+                <li><a href="favorites.php">Bài viết đã thích</a></li>
+                <li><a href="dang-bai.php">Độc giả đăng bài</a></li>
+            </ul>
             <p class="dangnhap"><a href="dangnhap.php">Đăng nhập</a></p>
             <div class="search-btn">
+                <!-- <input class="tim" type="text" placeholder="Search.." name="search"> -->
                 <a href="search.php"><i class="search-icon ti-search"></i></a>
             </div>
         </div>

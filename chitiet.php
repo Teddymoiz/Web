@@ -54,7 +54,7 @@ include("footer.php");
         </div>
     </div>
 
-    <div id="content">
+    <div id="content" class="main-content">
         <div class="post">
             <h2><?php echo $row["title"]; ?></h2>
             <?php
@@ -62,7 +62,7 @@ include("footer.php");
                 echo '<img src="' . $row["image"] . '" alt="' . $row["title"] . '">';
             }
             ?>
-            <p><?php echo $row["content"]; ?></p>
+            <p><?php echo nl2br($row["content"]); ?></p>
         </div>
     </div>
 </div>

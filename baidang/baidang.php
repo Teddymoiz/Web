@@ -95,9 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
                     <input type="text" id="title" name="title" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="content">Nội Dung:</label>
-                    <textarea id="content" name="content" class="form-control" required></textarea>
-                </div>
+                    <label for="content">Nội Dung:</la>
+                    <textarea id="content" name="content" class="form-control"></textarea>
+                    <label for="content_file">Hoặc tải lên tệp DOCX:</label>
+                    <input type="file" id="content_file" name="content_file" accept=".docx" class="form-control">
+            </div>
                 <div class="form-group">
                     <label for="image">Ảnh:</label>
                     <input type="file" id="image" name="image" accept="image/*" class="form-control">
@@ -119,8 +121,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
                     <input type="text" id="edit_title" name="title" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="edit_content">Nội Dung:</label>
-                    <textarea id="edit_content" name="content" class="form-control" required></textarea>
+                    <label for="content">Nội Dung:</label>
+                    <textarea id="content" name="content" class="form-control"></textarea>
+                    <label for="content_file">Hoặc tải lên tệp DOCX:</label>
+                    <input type="file" id="content_file" name="content_file" accept=".docx" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="edit_image">Ảnh:</label>
@@ -131,30 +135,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
         </div>
     </div>
 
-    <script>
-        function editArticle(id, title, content) {
-            document.getElementById('edit_id').value = id;
-            document.getElementById('edit_title').value = title;
-            document.getElementById('edit_content').value = content;
-            document.getElementById('editModal').style.display = 'block';
-        }
 
-        window.onclick = function(event) {
-            var addModal = document.getElementById('addModal');
-            var editModal = document.getElementById('editModal');
-            if (event.target == addModal) {
-                addModal.style.display = 'none';
-            }
-            if (event.target == editModal) {
-                editModal.style.display = 'none';
-            }
-        }
-
-        document.querySelectorAll('.close').forEach(function(element) {
-            element.onclick = function() {
-                element.parentElement.parentElement.style.display = 'none';
-            }
-        });
-    </script>
 </body>
 </html>
