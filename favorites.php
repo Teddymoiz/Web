@@ -1,4 +1,8 @@
+<!--  -->
+
 <?php
+session_start(); // Khởi tạo phiên làm việc
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -12,36 +16,37 @@ if ($conn->connect_error) {
     die("Kết nối thất bại: " . $conn->connect_error);
 }
 
-// Lấy ID bài đăng từ URL
-$id = $_GET['id'];
-
-// Truy vấn dữ liệu bài đăng dựa trên ID
-$sql = "SELECT title, content, image FROM db_baidang WHERE id = $id";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Lấy dữ liệu bài đăng
-    $row = $result->fetch_assoc();
+// Lấy ID người dùng từ phiên đăng nhập
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
 } else {
-    echo "Bài đăng không tồn tại.";
-    exit;
+    echo "Bạn cần đăng nhập để thực hiện chức năng này.";
+    exit();
 }
 
-include("footer.php");
+// Truy vấn danh sách bài viết yêu thích
+$sql = "SELECT db_baidang.id, db_baidang.title, db_baidang.image FROM yeuthich 
+        JOIN db_baidang ON yeuthich.post_id = db_baidang.id 
+        WHERE yeuthich.user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $row["title"]; ?> - Tin Tức Nhanh</title>
+    <title>Bài viết yêu thích - Tin Tức Nhanh</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./thietke/style.css">
     <link rel="stylesheet" href="./font icon/themify-icons-font/themify-icons/themify-icons.css">
 </head>
 <body>
 <div id="main">
-<div id="header">
+    < <div id="header">
         <h1 class="h1"><a href="index.php">Tin Tức Nhanh</a></h1>
         <div id="nav">
             <li><a href="index.php">Tin mới</a></li>
@@ -51,7 +56,7 @@ include("footer.php");
                 <p class="dangnhap"><a href="logout.php">Đăng xuất</a></p>
                 <p class="welcome">Chào, <?php echo $_SESSION['username']; ?></p>
             <?php else: ?>
-                <p class="dangnhap"><a href="dangnhap.php">Đăng nhập</a></p>
+                <p class="dangnhap"><a href="login.php">Đăng nhập</a></p>
             <?php endif; ?>
             <div class="search-btn">
                 <a href="search.php"><i class="search-icon ti-search"></i></a>
@@ -60,24 +65,23 @@ include("footer.php");
     </div>
 
     <div id="content">
-        <div class="post">
-            <h2><?php echo $row["title"]; ?></h2>
-            <?php
-            if ($row["image"]) {
-                echo '<img src="' . $row["image"] . '" alt="' . $row["title"] . '">';
+        <h2>Bài viết yêu thích</h2>
+        <?php
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<div class='post'>";
+                if ($row["image"]) {
+                    echo "<img src='" . $row["image"] . "' alt='" . $row["title"] . "' class='post-image'>";
+                }
+                echo "<h3><a href='post.php?id=" . $row["id"] . "'>" . $row["title"] . "</a></h3>";
+                echo "</div>";
             }
-            ?>
-            <p><?php echo $row["content"]; ?></p>
-            <form method="post" action="add_to_favorites.php">
-                <input type="hidden" name="post_id" value="<?php echo $id; ?>">
-                <button type="submit" name="add_to_favorites" class="favorite-btn">Thêm vào yêu thích</button>
-            </form>
-        </div>
+        } else {
+            echo "<p>Không có bài viết yêu thích.</p>";
+        }
+        $conn->close();
+        ?>
     </div>
 </div>
 </body>
 </html>
-
-<?php
-$conn->close();
-?>

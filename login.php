@@ -37,3 +37,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 $conn->close();
 ?>
+<?php
+// Dữ liệu mẫu để kiểm tra đăng nhập
+$users = [
+    'user1' => 'password1',
+    'user2' => 'password2',
+];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Kiểm tra thông tin đăng nhập
+    if (isset($users[$username]) && $users[$username] == $password) {
+        $_SESSION['username'] = $username;
+        header('Location: index.php');
+        exit();
+    } else {
+        echo "Tên đăng nhập hoặc mật khẩu không đúng.";
+    }
+}
+?>

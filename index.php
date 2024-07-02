@@ -1,11 +1,9 @@
 <?php
-include("./baidang/functions.php");
-include("footer.php");
+session_start();
 include("config.php");
-
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,17 +14,19 @@ include("config.php");
 </head>
 <body>
 <div id="main">
-<div id="header">
+    <div id="header">
         <h1 class="h1"><a href="index.php">Tin Tức Nhanh</a></h1>
         <div id="nav">
-            <ul>
-                <li><a href="index.php">Tin mới</a></li>
-                <li><a href="favorites.php">Bài viết đã thích</a></li>
-                <li><a href="dang-bai.php">Độc giả đăng bài</a></li>
-            </ul>
-            <p class="dangnhap"><a href="dangnhap.php">Đăng nhập</a></p>
+            <li><a href="index.php">Tin mới</a></li>
+            <li><a href="favorites.php">Bài viết đã thích</a></li>
+            <li><a href="dang-bai.php">Độc giả đăng bài</a></li>
+            <?php if(isset($_SESSION['username'])): ?>
+                <p class="dangnhap"><a href="logout.php">Đăng xuất</a></p>
+                <p class="welcome">Chào, <?php echo $_SESSION['username']; ?></p>
+            <?php else: ?>
+                <p class="dangnhap"><a href="dangnhap.php">Đăng nhập</a></p>
+            <?php endif; ?>
             <div class="search-btn">
-                <!-- <input class="tim" type="text" placeholder="Search.." name="search"> -->
                 <a href="search.php"><i class="search-icon ti-search"></i></a>
             </div>
         </div>
