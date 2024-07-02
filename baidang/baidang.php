@@ -1,16 +1,5 @@
 <?php
-// Kết nối cơ sở dữ liệu
-$servername = "localhost";
-$username = "root";
-$password = ""; // Đảm bảo rằng mật khẩu của MySQL là chính xác, nếu không có mật khẩu thì để chuỗi rỗng
-$dbname = "db_tintuc"; // Tên cơ sở dữ liệu bạn đã tạo
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
+include("config.php");
 
 // Hàm lấy danh sách bài báo
 function getArticles() {

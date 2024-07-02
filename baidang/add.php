@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_tintuc";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
+include("config.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add'])) {
     $title = $_POST['title'];
